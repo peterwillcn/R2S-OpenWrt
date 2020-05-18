@@ -20,4 +20,4 @@ LUCI版本：19.07（当日最新）
 ### 特性及功能：
 1.O3编译
 
-3.内置两款主题，包含SSRP，openclash，adguardhome，微信推送，网易云解锁，SQM，SmartDNS，网络唤醒，应用过滤，DDNS，迅雷快鸟，UPNP，FullCone，流量分载（offload），BBR（默认开启）
+2.内置两款主题，包含SSRP，openclash，adguardhome，微信推送，网易云解锁，SQM，SmartDNS，网络唤醒，应用过滤，DDNS，迅雷快鸟，UPNP，FullCone，流量分载（offload），BBR（默认开启）

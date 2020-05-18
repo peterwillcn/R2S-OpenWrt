@@ -72,5 +72,5 @@ jobs:
     - name: Upload Firmwares
       uses: actions/upload-artifact@master
       with:
-        name: R2S-OpenWr
+        name: R2S-OpenWrt
         path: openwrt/bin/targets/rockchip/armv8/

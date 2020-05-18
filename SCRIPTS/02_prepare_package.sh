@@ -88,8 +88,6 @@ svn co https://github.com/pymumu/smartdns/trunk/package/openwrt package/new/smar
 svn co https://github.com/project-openwrt/openwrt/branches/openwrt-19.07/package/ntlf9t/luci-app-smartdns package/new/smartdns/luci-app-smartdns
 #上网APP过滤
 git clone -b master --single-branch https://github.com/destan19/OpenAppFilter package/new/OpenAppFilter
-#BBR_Patch
-wget -P target/linux/generic/pending-4.14/ https://raw.githubusercontent.com/QiuSimons/Others/master/607-tcp_bbr-adapt-cwnd-based-on-ack-aggregation-estimation.patch
 #FullCone补丁
 # FullCone 
 git clone -b master --single-branch https://github.com/QiuSimons/openwrt-fullconenat package/fullconenat
@@ -101,10 +99,6 @@ pushd feeds/luci
 wget -O- https://github.com/LGA1150/fullconenat-fw3-patch/raw/master/luci.patch | git apply
 popd
 # Patch Kernel
-pushd target/linux/generic/hack-4.14
-wget https://github.com/coolsnowwolf/lede/raw/master/target/linux/generic/hack-4.14/952-net-conntrack-events-support-multiple-registrant.patch
-wget https://github.com/coolsnowwolf/lede/raw/master/target/linux/generic/hack-4.14/202-reduce_module_size.patch
-popd
 pushd target/linux/generic/hack-5.4
 wget https://raw.githubusercontent.com/project-openwrt/openwrt/18.06-kernel5.4/target/linux/generic/hack-5.4/952-net-conntrack-events-support-multiple-registrant.patch
 popd

@@ -1,5 +1,5 @@
 #!/bin/bash
-git clone https://github.com/openwrt/openwrt.git
+git clone https://git.openwrt.org/openwrt/openwrt.git
 cd openwrt
 patch -p1 < ../PATCH/R2S.patch
 cd target/linux/rockchip

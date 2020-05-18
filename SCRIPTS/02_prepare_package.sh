@@ -43,8 +43,8 @@ git clone -b master --single-branch https://github.com/QiuSimons/Luci-argon-19 p
 #AdGuard
 git clone -b master --single-branch https://github.com/rufengsuixing/luci-app-adguardhome package/new/luci-app-adguardhome
 #SSRP
-#svn co https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus package/lean/luci-app-ssr-plus
-svn co https://github.com/QiuSimons/helloworld/trunk/luci-app-ssr-plus package/lean/luci-app-ssr-plus
+svn co https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus package/lean/luci-app-ssr-plus
+#svn co https://github.com/QiuSimons/helloworld/trunk/luci-app-ssr-plus package/lean/luci-app-ssr-plus
 rm -rf ./package/lean/luci-app-ssr-plus/luasrc/view/shadowsocksr/ssrurl.htm
 wget -P package/lean/luci-app-ssr-plus/luasrc/view/shadowsocksr https://raw.githubusercontent.com/QiuSimons/Others/master/luci-app-ssr-plus/luasrc/view/shadowsocksr/ssrurl.htm
 #SSRP依赖

@@ -3,6 +3,9 @@
 ### 发布地址：
 https://github.com/QiuSimons/R2S-OpenWrt/releases
 
+### 追新党可以在Action中取每日更新：
+https://github.com/QiuSimons/R2S-OpenWrt/actions
+
 ### 注意事项：
 1.登陆IP：192.168.1.1 密码：无
 

@@ -68,7 +68,7 @@ jobs:
     - name: Cleaning
       run: |
         cd openwrt/bin/targets/rockchip/armv8
-        rm -rf `ls | grep -v "ext4"`
+        rm -rf `ls | grep -v "squashfs"`
     - name: Upload Firmwares
       uses: actions/upload-artifact@master
       with:

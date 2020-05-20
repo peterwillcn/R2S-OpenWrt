@@ -3,7 +3,7 @@
 ### 发布地址：
 https://github.com/QiuSimons/R2S-OpenWrt/releases
 
-### 追新党可以在Action中取每日更新：
+### 追新党可以在Action中取每日更新（可能会翻车，风险自担）：
 https://github.com/QiuSimons/R2S-OpenWrt/actions
 
 ### 注意事项：

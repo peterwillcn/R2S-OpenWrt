@@ -2,6 +2,9 @@
 clear
 rm -f ./feeds.conf.default
 wget https://raw.githubusercontent.com/openwrt/openwrt/openwrt-19.07/feeds.conf.default
+#remove annoying snapshot tag
+sed -i 's,SNAPSHOT,,g' include/version.mk
+sed -i 's,snapshots,,g' package/base-files/image-config.in
 #更新feed
 ./scripts/feeds update -a && ./scripts/feeds install -a
 #arpbind

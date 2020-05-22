@@ -6,6 +6,9 @@ https://github.com/QiuSimons/R2S-OpenWrt/releases
 ### 追新党可以在Action中取每日更新（可能会翻车，风险自担）：
 https://github.com/QiuSimons/R2S-OpenWrt/actions
 
+### 本地一键编译命令（注意装好依赖）：
+git clone https://github.com/QiuSimons/R2S-OpenWrt.git&&cd R2S-OpenWrt&&bash onekeyr2s.sh
+
 ### 注意事项：
 1.登陆IP：192.168.1.1 密码：无
 

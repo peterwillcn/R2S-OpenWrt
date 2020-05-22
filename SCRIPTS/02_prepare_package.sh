@@ -26,7 +26,7 @@ svn co https://github.com/songchenwen/nanopi-r2s/trunk/luci-app-r2sflasher packa
 sed -i 's/"luci.fs"/"luci.sys".net/g' package/new/luci-app-r2sflasher/luasrc/model/cbi/r2sflasher/flash.lua
 #登录保护
 git clone -b openwrt-19.07 --single-branch https://github.com/NateLol/luci-app-beardropper package/new/luci-app-beardropper
-sed -i 's/"luci.fs"/"luci.sys".net/g' package/new/luci-app-beardropper/luasrc/model/cbi/bearDropper/setting.lua
+sed -i 's/"luci.fs"/"luci.sys".net/g' package/new/luci-app-beardropper/files/luasrc/model/cbi/bearDropper/setting.lua
 #迅雷快鸟
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-xlnetacc package/lean/luci-app-xlnetacc
 #DDNS

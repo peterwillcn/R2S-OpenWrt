@@ -70,16 +70,19 @@ jobs:
         chmod -R 755 ./
     - name: Make Toolchain
       run: |
+        df -h
         cd openwrt
         let make_process=$(nproc)+1
         make toolchain/install -j${make_process} V=s
     - name: Compile Openwrt
       run: |
+        df -h
         cd openwrt
         let make_process=$(nproc)+1
         make -j${make_process} V=s || make -j${make_process} V=s
     - name: Cleaning
       run: |
+        df -h
         cd openwrt/bin/targets/rockchip/armv8
         /bin/bash ../../../../../SCRIPTS/05_cleaning.sh
     - name: Print Disk Space After

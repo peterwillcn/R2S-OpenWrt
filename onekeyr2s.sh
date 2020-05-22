@@ -8,6 +8,7 @@ bash 03_convert_translation.sh
 bash 04_remove_upx.sh
 mv ../SEED/config.seed .config
 make defconfig
+make download -j10
 chmod -R 755 ./
 let make_process=$(nproc)+1
 make toolchain/install -j${make_process} V=s

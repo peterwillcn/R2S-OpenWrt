@@ -31,6 +31,8 @@ jobs:
         sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php
         git clone https://github.com/friendlyarm/repo
         sudo cp repo/repo /usr/bin/
+    - name: Print Disk Space Before
+      run: df -h
     - name: Prepare Mixedwrt
       run: |
         sudo chown -R runner:runner /home/runner/work/R2S-OpenWrt
@@ -69,6 +71,8 @@ jobs:
       run: |
         cd openwrt/bin/targets/rockchip/armv8
         /bin/bash ../../../../../SCRIPTS/05_cleaning.sh
+    - name: Print Disk Space After
+      run: df -h
     - name: Upload Firmwares
       uses: actions/upload-artifact@master
       with:

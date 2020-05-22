@@ -40,7 +40,7 @@ jobs:
         sudo rm -rf "$AGENT_TOOLSDIRECTORY"
         df -h
     - name: Cleanup Old Action Artifacts
-      run: .github/workflows/purge_artifacts.sh ${{ secrets.REPO_ACCESS_TOKEN }}
+      uses: kolpav/purge-artifacts-action@v1
     - name: Prepare Mixedwrt
       run: |
         sudo chown -R runner:runner /home/runner/work/R2S-OpenWrt

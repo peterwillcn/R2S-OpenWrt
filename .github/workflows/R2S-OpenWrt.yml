@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - '.github/workflows/origin-full.yml'
+      - '.github/workflows/R2S-OpenWrt.yml'
       - 'CHANGELOG.md'
 
 env:

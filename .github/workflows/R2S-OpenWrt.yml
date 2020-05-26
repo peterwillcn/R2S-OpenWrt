@@ -1,94 +1,113 @@
-name: R2S-OpenWrt
+name: OpenWrt for R2S
 
 on:
-#  push:
-#    branches: 
-#      - master
-  schedule:
-    - cron: 40 11 * * *
-  watch:
-    types: [started]
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/origin-full.yml'
+      - 'CHANGELOG.md'
+
+env:
+  UPLOAD_FIRMWARE: true
+  TZ: Asia/Hong_Kong
 
 jobs:
   build:
     runs-on: ubuntu-18.04
     if: github.event.repository.owner.id == github.event.sender.id
-    
+
     steps:
-    - name: Clone Repository
-      uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: 'master'
+
+    - name: Show system and free disk space
+      run: |
+        uname -a
+        [ -f /proc/version ] && cat /proc/version
+        [ -f /etc/issue.net ] && cat /etc/issue.net
+        [ -f /etc/issue ] && cat /etc/issue
+        sudo -E swapoff -a
+        sudo -E rm -f /swapfile
+        sudo -E docker image prune -a -f
+        sudo -E apt-get -y purge azure* dotnet* firefox ghc* google* hhvm llvm* mono* mysql* openjdk* php* powershell zulu*
+        sudo -E apt-get -y autoremove --purge
+        sudo -E apt-get clean
+        sudo -E rm -rf /usr/share/dotnet /usr/local/lib/android/sdk /etc/mysql /etc/php /usr/local/share/boost
+        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        df -h
+
     - name: Init build dependencies
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        docker rmi $(docker images -q)
-        sudo -E apt-get remove -y --purge azure-cli ghc zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
+        sudo -E rm -rf /etc/apt/sources.list.d
         sudo -E apt-get update -y
         sudo -E apt-get install -y build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib g++-multilib p7zip p7zip-full msmtp libssl-dev texinfo libreadline-dev libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint ccache curl wget vim nano python python3 python-pip python3-pip python-ply python3-ply haveged lrzsz device-tree-compiler scons
         wget -O - https://raw.githubusercontent.com/friendlyarm/build-env-on-ubuntu-bionic/master/install.sh | bash
-        sudo -E apt-get autoremove -y --purge
         sudo -E apt-get clean -y
-        sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php
-        git clone https://github.com/friendlyarm/repo
-        sudo cp repo/repo /usr/bin/
-    - name: Free Disk Space
-      run: |
-        sudo swapoff -a
-        sudo rm -f /swapfile
-        sudo apt clean
-        sudo rm -rf "/usr/local/share/boost"
-        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        git config --global user.name "GitHubActions" && git config --global user.email "noreply@github.com"
         df -h
-    - name: Cleanup Old Action Artifacts
-      uses: kolpav/purge-artifacts-action@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        expire-in: 0days # Setting this to 0 will delete all artifacts
+
     - name: Prepare Mixedwrt
       run: |
         sudo chown -R runner:runner /home/runner/work/R2S-OpenWrt
         cp -r ./SCRIPTS/. ./
+        echo "::set-env name=DATETIME::$(date "+%Y%m%d-%H%M")"
         /bin/bash 01_get_ready.sh
+
     - name: Prepare Package
       run: |
         cd openwrt
         cp -r ../SCRIPTS/. ./
         /bin/bash 02_prepare_package.sh
+
     - name: Convert Translation
       run: |
         cd openwrt
         /bin/bash 03_convert_translation.sh
+
     - name: Remove Upx
       run: |
         cd openwrt
         /bin/bash 04_remove_upx.sh
+
     - name: Make Config
       run: |
         cd openwrt
         mv ../SEED/config.seed .config
+        cat ../SEED/more.seed >> .config
         make defconfig
         chmod -R 755 ./
+
     - name: Make Toolchain
       run: |
         df -h
         cd openwrt
         let make_process=$(nproc)+1
         make toolchain/install -j${make_process} V=s
+
     - name: Compile Openwrt
       run: |
         df -h
         cd openwrt
         let make_process=$(nproc)+1
         make -j${make_process} V=s || make -j${make_process} V=s
+
     - name: Cleaning
       run: |
         df -h
         cd openwrt/bin/targets/rockchip/armv8
+        echo "::set-env name=FIRMWARE::$PWD"
         /bin/bash ../../../../../SCRIPTS/05_cleaning.sh
-    - name: Print Disk Space After
-      run: df -h
+        df -h
+        echo "::set-output name=status::success"
+
     - name: Upload Firmwares
-      uses: actions/upload-artifact@master
+      uses: actions/upload-artifact@v2
+      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       with:
-        name: R2S-OpenWrt
-        path: openwrt/bin/targets/rockchip/armv8/
+        name: OpenWrt_R2S_${{ env.DATETIME }}
+        path: ${{ env.FIRMWARE }}

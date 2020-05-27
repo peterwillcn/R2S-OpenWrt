@@ -2,7 +2,7 @@
 
 ### 发布地址：
 （可能会翻车，风险自担）  
-https://github.com/KaneGreen/R2S-OpenWrt/actions
+https://github.com/KaneGreen/R2S-OpenWrt/actions  ![OpenWrt for R2S](https://github.com/KaneGreen/R2S-OpenWrt/workflows/OpenWrt%20for%20R2S/badge.svg?branch=master)
 
 ### 本地一键编译命令（注意装好依赖）：
 ```sh

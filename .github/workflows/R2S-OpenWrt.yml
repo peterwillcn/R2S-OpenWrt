@@ -99,9 +99,15 @@ jobs:
     - name: Cleaning
       run: |
         df -h
-        cd openwrt/bin/targets/rockchip/armv8
+        rm -rf ./artifact && mkdir -p ./artifact
+        cd ./artifact
         echo "::set-env name=FIRMWARE::$PWD"
+        cd ../openwrt
+        cp -f .config ../artifact/kconfig-full
+        /bin/bash ./scripts/diffconfig.sh > ../artifact/kconfig-lite
+        cd bin/targets/rockchip/armv8
         /bin/bash ../../../../../SCRIPTS/05_cleaning.sh
+        mv -f ./* ../../../../../artifact/
         df -h
         echo "::set-output name=status::success"
 

@@ -1,5 +1,8 @@
 ## 变更历史
+### 2020/05/27 build 05
+* 添加主题luci-theme-openwrt。
 ### 2020/05/27 build 04
+已取消。
 * 再次调整ROOTFS大小。
 ### 2020/05/27 build 03
 * 重新编译build 02。

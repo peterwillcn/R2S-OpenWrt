@@ -23,7 +23,11 @@ LUCI版本：19.07（当日最新）
 ### 特性及功能：
 1. O3编译
 
-2. 内置两款主题，包含SSRP，openclash，adguardhome，SQM，SmartDNS，网络唤醒，DDNS，UPNP，FullCone，流量分载（offload），BBR（默认开启）
+2. 内置两款主题，包含SSRP，OpenClash，adbyby-plus，SQM，SmartDNS，网络唤醒，DDNS，UPNP，FullCone，流量分载（offload），BBR（默认开启）
+
+### 其他信息
+OpenClash与默认主题openwrt**不兼容**。  
+需要使用OpenClash的用户请切换为其他主题。不使用OpenClash的用户使用任何主题均可。
 
 ### 感谢
 [QiuSimons](https://github.com/QiuSimons/R2S-OpenWrt)

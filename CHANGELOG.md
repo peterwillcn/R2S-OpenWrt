@@ -1,4 +1,8 @@
 ## 变更历史
+### 2020/05/31 build 07
+* AdGuard Home改为Adbyby-plus。
+* 移除beardropper。
+* 添加asix USB网卡支持。
 ### 2020/05/28 build 06
 * 更新SSRP为178-5。
 ### 2020/05/27 build 05

@@ -26,8 +26,7 @@ LUCI版本：19.07（当日最新）
 2. 内置两款主题，包含SSRP，OpenClash，adbyby-plus，SQM，SmartDNS，网络唤醒，DDNS，UPNP，FullCone，流量分载（offload），BBR（默认开启）
 
 ### 其他信息
-OpenClash与默认主题openwrt**不兼容**。  
-需要使用OpenClash的用户请切换为其他主题。不使用OpenClash的用户使用任何主题均可。
+由于添加了`shadow-utils`组件。管理页面上的`更改密码`功能失效。请使用SSH空密码登陆后，执行`passwd`命令并根据提示设置密码。
 
 ### 感谢
 [QiuSimons](https://github.com/QiuSimons/R2S-OpenWrt)

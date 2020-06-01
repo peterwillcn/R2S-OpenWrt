@@ -1,4 +1,7 @@
 ## 变更历史
+### 2020/06/01 build 08
+* 更新v2ray-core至`4.23.2`，修复[tls相关问题](https://github.com/v2ray/discussion/issues/704)。
+* 出于兼容性考虑，移除luci-theme-openwrt主题。现在默认主题是luci-theme-material。
 ### 2020/05/31 build 07
 * AdGuard Home改为Adbyby-plus。
 * 移除beardropper。

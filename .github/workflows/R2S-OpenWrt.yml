@@ -9,6 +9,7 @@ on:
       - 'CHANGELOG.md'
 
 env:
+  SWAP_WANLAN: true
   UPLOAD_FIRMWARE: true
   TZ: Asia/Hong_Kong
 
@@ -57,6 +58,12 @@ jobs:
         cp -r ./SCRIPTS/. ./
         echo "::set-env name=DATETIME::$(date "+%Y%m%d-%H%M")"
         /bin/bash 01_get_ready.sh
+
+    - name: Swap WAN and LAN
+      if: env.SWAP_WANLAN == 'true'
+      run: |
+        cd openwrt/target/linux/rockchip/armv8/base-files/etc/board.d/
+        sed -i 's/ucidef_set_interfaces_lan_wan "eth1" "eth0"/ucidef_set_interfaces_lan_wan "eth0" "eth1"/g' 02_network
 
     - name: Prepare Package
       run: |

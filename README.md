@@ -11,9 +11,11 @@ git clone https://github.com/KaneGreen/R2S-OpenWrt.git && cd R2S-OpenWrt && bash
 ### 注意事项：
 1. 登陆IP：`192.168.1.1`，密码：无
 
-2. LAN 和 WAN 的灯可能不亮
+2. LAN WAN 已交换
 
-3. OP内置升级可用
+3. LAN 和 WAN 的灯可能不亮
+
+4. OP内置升级可用
 
 ### 版本信息：
 其他模块版本：SNAPSHOT（当日最新）

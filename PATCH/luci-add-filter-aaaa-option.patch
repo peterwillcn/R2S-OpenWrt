@@ -5,13 +5,13 @@ Subject: [PATCH] dnsmasq: add filter-aaaa option
 
 Signed-off-by: Chuck <fanck0605@qq.com>
 ---
- .../htdocs/luci-static/resources/view/network/dhcp.js        | 5 +++++
+ .../feeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js        | 5 +++++
  1 file changed, 5 insertions(+)
 
-diff --git a/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js b/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
+diff --git a/feeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js b/feeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
 index 6693dc0eac..1c8f943758 100644
---- a/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
-+++ b/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
+--- a/feeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
++++ b/feeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
 @@ -199,6 +199,11 @@ return view.extend({
  		s.taboption('files', form.DynamicList, 'addnhosts',
  			_('Additional Hosts files')).optional = true;

@@ -8,6 +8,8 @@ sed -i 's,SNAPSHOT,,g' include/version.mk
 sed -i 's,snapshots,,g' package/base-files/image-config.in
 #更新feed
 ./scripts/feeds update -a && ./scripts/feeds install -a
+rm -rf ./package/network/services/dnsmasq
+svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/network/services/dnsmasq package/network/services/dnsmasq
 #Patch dnsmasq
 patch -p1 < ../PATCH/dnsmasq-add-filter-aaaa-option.patch
 patch -p1 < ../PATCH/luci-add-filter-aaaa-option.patch

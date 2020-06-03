@@ -18,6 +18,8 @@ git clone https://github.com/QiuSimons/R2S-OpenWrt.git&&cd R2S-OpenWrt&&bash one
 
 4.SSRP使用姿势： ①添加你要的订阅链接 ②再在最后加一行空行 ③右下角点一下保存并应用 ④更新所有订阅服务器节点
 
+5.遇到上不了网的，请自行排查自己的ipv6联通情况，或禁用ipv6（同时禁用WAN和LAN的ipv6）
+
 ### 版本信息：
 其他模块版本：SNAPSHOT（当日最新）
 
@@ -26,4 +28,4 @@ LUCI版本：19.07（当日最新）
 ### 特性及功能：
 1.O3编译
 
-2.内置两款主题，包含SSRP，openclash，adguardhome，微信推送，网易云解锁，SQM，SmartDNS，网络唤醒，应用过滤，DDNS，迅雷快鸟，UPNP，FullCone，流量分载（offload），BBR（默认开启）
+2.内置三款主题，包含SSRP，openclash，ADBYBY，BearDropper，微信推送，网易云解锁，SQM，SmartDNS，网络唤醒，DDNS，迅雷快鸟，UPNP，FullCone(防火墙中开启)，流量分载(防火墙中开启)，BBR（默认开启）

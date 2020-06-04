@@ -1,4 +1,8 @@
 ## 变更历史
+### 2020/06/04 build 09
+* 更新[上游](https://github.com/QiuSimons/R2S-OpenWrt/tree/3c6cc906d322ed6608c0cf83e1319f9f74356f31)。
+* 添加主题luci-theme-argo。
+* 内核更新至`5.4.43`。
 ### 2020/06/01 build 08
 * 更新v2ray-core至`4.23.2`，修复[tls相关问题](https://github.com/v2ray/discussion/issues/704)。
 * 出于兼容性考虑，移除luci-theme-openwrt主题。现在默认主题是luci-theme-material。

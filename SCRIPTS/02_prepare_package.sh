@@ -7,6 +7,10 @@ sed -i 's,SNAPSHOT,,g' include/version.mk
 sed -i 's,snapshots,,g' package/base-files/image-config.in
 # 更新feed
 ./scripts/feeds update -a && ./scripts/feeds install -a
+#rm -rf ./package/network/services/dnsmasq
+#svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/network/services/dnsmasq package/network/services/dnsmasq
+#patch -p1 < ../PATCH/dnsmasq-add-filter-aaaa-option.patch
+#patch -p1 < ../PATCH/luci-add-filter-aaaa-option.patch
 # arpbind
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-arpbind package/lean/luci-app-arpbind
 # O3优化
@@ -35,6 +39,8 @@ svn co https://github.com/openwrt/luci/branches/openwrt-18.06/applications/luci-
 sed -i 's/0/1/g' feeds/packages/utils/irqbalance/files/irqbalance.config
 # 定时重启
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-autoreboot package/lean/luci-app-autoreboot
+# 主题
+git clone -b master --single-branch https://github.com/jerrykuku/luci-theme-argon package/new/luci-theme-argon
 # SSRP
 svn co https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus package/lean/luci-app-ssr-plus
 rm -rf ./package/lean/luci-app-ssr-plus/luasrc/view/shadowsocksr/ssrurl.htm

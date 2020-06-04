@@ -17,15 +17,17 @@ git clone https://github.com/KaneGreen/R2S-OpenWrt.git && cd R2S-OpenWrt && bash
 
 4. OP内置升级可用
 
+5. 遇到上不了网的，请自行排查自己的IPv6连接情况，或禁用IPv6（同时禁用WAN和LAN的IPv6）
+
 ### 版本信息：
 其他模块版本：SNAPSHOT（当日最新）
 
 LUCI版本：19.07（当日最新）
 
 ### 特性及功能：
-1. O3编译
+1. O3编译。
 
-2. 内置两款主题，包含SSRP，OpenClash，adbyby-plus，SQM，SmartDNS，网络唤醒，DDNS，UPNP，FullCone，流量分载（offload），BBR（默认开启）
+2. 内置三款主题，包含SSRP，OpenClash，adbyby-plus，SQM，SmartDNS，网络唤醒，DDNS，UPNP，FullCone（防火墙中手动开启），流量分载（offload，防火墙中手动开启），BBR（默认开启）。
 
 ### 其他信息
 由于添加了`shadow-utils`组件，管理页面上的`更改密码`功能失效。  

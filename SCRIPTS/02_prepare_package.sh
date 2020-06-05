@@ -2,13 +2,15 @@
 clear
 rm -f ./feeds.conf.default
 wget https://raw.githubusercontent.com/openwrt/openwrt/openwrt-19.07/feeds.conf.default
-echo "src-git natelol https://github.com/natelol/natelol.git" >> feeds.conf.default
 #remove annoying snapshot tag
 sed -i 's,SNAPSHOT,,g' include/version.mk
 sed -i 's,snapshots,,g' package/base-files/image-config.in
 #更新feed
 ./scripts/feeds update -a && ./scripts/feeds install -a
 #fix bd issue
+#beardropper
+git clone https://github.com/NateLol/luci-app-beardropper package/luci-app-beardropper
+sed -i 's/"luci.fs"/"luci.sys".net/g' package/luci-app-beardropper/files/luasrc/model/cbi/bearDropper/setting.lua
 sed -i 's/firewall/d' package/luci-app-beardropper/root/etc/uci-defaults/luci-beardropper
 #dnsmasq
 rm -rf ./package/network/services/dnsmasq

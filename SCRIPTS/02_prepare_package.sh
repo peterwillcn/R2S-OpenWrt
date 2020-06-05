@@ -10,7 +10,7 @@ sed -i 's,snapshots,,g' package/base-files/image-config.in
 #fix bd issue
 #beardropper
 git clone https://github.com/NateLol/luci-app-beardropper package/luci-app-beardropper
-sed -i 's/"luci.fs"/"luci.sys".net/g' package/luci-app-beardropper/luasrc/model/cbi/bearDropper/setting.lua
+sed -i 's/"luci.fs"/"luci.sys".net/g' package/luci-app-beardropper/luasrc/model/cbi/beardropper/setting.lua
 sed -i '/firewall/d' package/luci-app-beardropper/root/etc/uci-defaults/luci-beardropper
 #dnsmasq
 #rm -rf ./package/network/services/dnsmasq

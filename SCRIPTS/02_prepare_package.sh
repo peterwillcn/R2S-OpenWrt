@@ -11,7 +11,7 @@ sed -i 's,snapshots,,g' package/base-files/image-config.in
 #beardropper
 git clone https://github.com/NateLol/luci-app-beardropper package/luci-app-beardropper
 sed -i 's/"luci.fs"/"luci.sys".net/g' package/luci-app-beardropper/files/luasrc/model/cbi/bearDropper/setting.lua
-sed -i 's/firewall/d' package/luci-app-beardropper/root/etc/uci-defaults/luci-beardropper
+sed -i '/firewall/d' package/luci-app-beardropper/root/etc/uci-defaults/luci-beardropper
 #dnsmasq
 #rm -rf ./package/network/services/dnsmasq
 #svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/network/services/dnsmasq package/network/services/dnsmasq

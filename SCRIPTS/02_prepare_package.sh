@@ -13,10 +13,11 @@ git clone https://github.com/NateLol/luci-app-beardropper package/luci-app-beard
 sed -i 's/"luci.fs"/"luci.sys".net/g' package/luci-app-beardropper/files/luasrc/model/cbi/bearDropper/setting.lua
 sed -i 's/firewall/d' package/luci-app-beardropper/root/etc/uci-defaults/luci-beardropper
 #dnsmasq
-rm -rf ./package/network/services/dnsmasq
-svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/network/services/dnsmasq package/network/services/dnsmasq
+#rm -rf ./package/network/services/dnsmasq
+#svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/network/services/dnsmasq package/network/services/dnsmasq
 patch -p1 < ../PATCH/dnsmasq-add-filter-aaaa-option.patch
 patch -p1 < ../PATCH/luci-add-filter-aaaa-option.patch
+cp -f ../PATCH/900-add-filter-aaaa-option.patch ./package/network/services/dnsmasq/patches/900-add-filter-aaaa-option.patch
 #arpbind
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-arpbind package/lean/luci-app-arpbind
 #O3

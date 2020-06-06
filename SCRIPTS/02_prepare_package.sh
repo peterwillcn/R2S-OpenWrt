@@ -7,10 +7,17 @@ sed -i 's,SNAPSHOT,,g' include/version.mk
 sed -i 's,snapshots,,g' package/base-files/image-config.in
 # 更新feed
 ./scripts/feeds update -a && ./scripts/feeds install -a
+#fix bd issue
+#beardropper
+git clone https://github.com/NateLol/luci-app-beardropper package/luci-app-beardropper
+sed -i 's/"luci.fs"/"luci.sys".net/g' package/luci-app-beardropper/luasrc/model/cbi/beardropper/setting.lua
+sed -i '/firewall/d' package/luci-app-beardropper/root/etc/uci-defaults/luci-beardropper
+#dnsmasq
 #rm -rf ./package/network/services/dnsmasq
 #svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/network/services/dnsmasq package/network/services/dnsmasq
-#patch -p1 < ../PATCH/dnsmasq-add-filter-aaaa-option.patch
-#patch -p1 < ../PATCH/luci-add-filter-aaaa-option.patch
+patch -p1 < ../PATCH/dnsmasq-add-filter-aaaa-option.patch
+patch -p1 < ../PATCH/luci-add-filter-aaaa-option.patch
+cp -f ../PATCH/900-add-filter-aaaa-option.patch ./package/network/services/dnsmasq/patches/900-add-filter-aaaa-option.patch
 # arpbind
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-arpbind package/lean/luci-app-arpbind
 # O3优化

@@ -1,5 +1,9 @@
 ## 变更历史
+### 2020/06/07 build 12
+* 添加badblocks坏道扫描工具。
+* 移除perl解释器。
 ### 2020/06/06 build 11
+空间不足导致编译失败。
 * 添加git和subversion-client两个版本控制工具。
 * 添加perl解释器。
 ### 2020/06/06 build 10

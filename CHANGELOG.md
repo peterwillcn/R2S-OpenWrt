@@ -1,4 +1,7 @@
 ## 变更历史
+### 2020/06/06 build 11
+* 添加git和subversion-client两个版本控制工具。
+* 添加perl解释器。
 ### 2020/06/06 build 10
 * 更新[上游](https://github.com/QiuSimons/R2S-OpenWrt/tree/57eeb22a07104f5537faa3b4764b8bd5811956ef)。
 * 为dnsmasq添加filter AAAA功能。

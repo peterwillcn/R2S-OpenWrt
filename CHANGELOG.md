@@ -2,6 +2,7 @@
 ### 2020/06/06 build 10
 * 更新[上游](https://github.com/QiuSimons/R2S-OpenWrt/tree/57eeb22a07104f5537faa3b4764b8bd5811956ef)。
 * 为dnsmasq添加filter AAAA功能。
+* 添加sha1sum、sha512sum、shred、rsync等命令行工具。
 ### 2020/06/04 build 09
 * 更新[上游](https://github.com/QiuSimons/R2S-OpenWrt/tree/3c6cc906d322ed6608c0cf83e1319f9f74356f31)。
 * 添加主题luci-theme-argo。

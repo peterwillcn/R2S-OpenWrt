@@ -1,4 +1,10 @@
 ## 变更历史
+### 2020/06/07 build 13
+* 移除subversion-client。
+* 添加openssh-client（标准的SSH客户端；服务端仍保持为dropbear不变）及相关工具。
+* 添加dropbearconvert用于将SSH格式密钥转换为dropbear的格式。
+* 为git添加http(s)协议支持。
+* 添加Node.js语言支持。
 ### 2020/06/07 build 12
 * 添加badblocks坏道扫描工具。
 * 扩大ROOTFS分区大小。

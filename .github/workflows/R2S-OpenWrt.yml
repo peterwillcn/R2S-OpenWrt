@@ -10,7 +10,6 @@ on:
 
 env:
   SWAP_WANLAN: true
-  ADD_PY3: true
   UPLOAD_FIRMWARE: true
   TZ: Asia/Hong_Kong
 
@@ -82,19 +81,11 @@ jobs:
         cd openwrt
         /bin/bash 04_remove_upx.sh
 
-    - name: Add Packages to Config
-      run: |
-        cp -f ./SEED/config.seed ./openwrt/.config
-        cat ./SEED/more.seed  >> ./openwrt/.config
-
-    - name: Add Python3
-      if: env.ADD_PY3 == 'true'
-      run: |
-        cat ./SEED/python3.seed >> ./openwrt/.config
-
     - name: Make Config
       run: |
         cd openwrt
+        mv  ../SEED/config.seed  .config
+        cat ../SEED/more.seed >> .config
         make defconfig
         chmod -R 755 ./
 
@@ -112,7 +103,7 @@ jobs:
         let make_process=$(nproc)+1
         make -j${make_process} V=s || make -j${make_process} V=s
 
-    - name: Cleaning
+    - name: Cleaning and hashing
       run: |
         df -h
         rm -rf ./artifact && mkdir -p ./artifact

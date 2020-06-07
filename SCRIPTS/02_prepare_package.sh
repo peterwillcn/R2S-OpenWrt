@@ -40,8 +40,8 @@ sed -i 's/0/1/g' feeds/packages/utils/irqbalance/files/irqbalance.config
 # 定时重启
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-autoreboot package/lean/luci-app-autoreboot
 # Node.js
-rf -rf ./package/lang/node
-svn co https://github.com/openwrt/packages/trunk/lang/node package/lang/node
+rm -rf ./feeds/packages/lang/node
+svn co https://github.com/openwrt/packages/trunk/lang/node feeds/packages/lang/node
 # 主题
 git clone -b master --single-branch https://github.com/jerrykuku/luci-theme-argon package/new/luci-theme-argon
 # SSRP

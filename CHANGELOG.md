@@ -1,4 +1,6 @@
 ## 变更历史
+### 2020/06/07 build 14
+* 为Node.js添加npm包管理器。
 ### 2020/06/07 build 13
 * 移除subversion-client。
 * 添加openssh-client（标准的SSH客户端；服务端仍保持为dropbear不变）及相关工具。

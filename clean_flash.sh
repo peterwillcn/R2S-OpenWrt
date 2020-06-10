@@ -97,7 +97,6 @@ echo -e '\033[32m开始写入数据...\033[00m'
 echo -e '\033[33m请不要操作键盘等输入设备，并保持电源接通。\n切勿中断此过程。\033[00m'
 if [ -f firmware.img ] ; then
     ./busybox dd conv=fsync bs=8M if=/tmp/uploads/firmware.img of=/dev/mmcblk0
-
 elif [ -f firmware.img.gz ] ; then
     ./busybox gzip -dc firmware.img.gz | ./busybox dd conv=fsync bs=8M of=/dev/mmcblk0
 fi

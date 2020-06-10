@@ -4,11 +4,9 @@ echo -e '\033[31m此操作将清空您的MicroSD卡上的数据。\033[00m'
 echo -e '\033[31m如果您打算放弃操作，请在20秒内按下Ctrl+C组合键。\033[00m'
 ( set -x ; sleep 20 )
 echo -e '\033[32m已启动刷机流程...\n请不要操作键盘等输入设备，并保持电源接通。\033[00m'
-
 cd /tmp
 [ -d "uploads" ] || mkdir uploads && cd uploads
 cp -f $(which busybox) ./
-
 if [ -f openwrt*.img ] ; then
     echo -e "\033[32m检测到IMG文件 $(ls openwrt*.img)\033[00m"
     if [ -f sha256_????????.hash ] ; then
@@ -79,8 +77,7 @@ else
     exit 132
 fi
 echo 1 > /proc/sys/kernel/sysrq
-umount / || echo u > /proc/sysrq-trigger
-
+echo u > /proc/sysrq-trigger
 if [ -n "$CLEANDISK" ] ; then
     echo -e '\033[32m开始擦除MicroSD卡：通常这将消耗很长时间。\033[00m'
     if [[ $CLEANDISK =~ ^[1-9][0-9]*$ ]] ; then
@@ -96,7 +93,6 @@ if [ -n "$CLEANDISK" ] ; then
     fi
     echo -e '\033[32m擦除完成\033[00m'
 fi
-
 echo -e '\033[32m开始写入数据...\033[00m'
 echo -e '\033[33m请不要操作键盘等输入设备，并保持电源接通。\n切勿中断此过程。\033[00m'
 if [ -f firmware.img ] ; then

@@ -1519,7 +1519,7 @@ diff -rNEZbwBdu3 a/target/linux/rockchip/armv8/base-files/etc/board.d/02_network
  
  case "$(board_name)" in
 +"friendlyelec,nanopi-r2-rev00")
-+	ucidef_set_interfaces_lan_wan "eth1" "eth0"
++	ucidef_set_interfaces_lan_wan "eth0" "eth1"
 +	;;
  *)
  	ucidef_set_interface_lan 'eth0'

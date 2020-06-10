@@ -1,4 +1,9 @@
 #!/bin/bash
+######################################################
+# 使用说明：
+# 请先将固件文件和本脚本放置在 /tmp/uploads/ 目录下，
+# 然后再 /bin/bash 调用此脚本。
+######################################################
 echo -e '\033[1;31m您确认要开始刷机吗？\033[00m'
 echo -e '\033[31m此操作将清空您的MicroSD卡上的数据。\033[00m'
 echo -e '\033[31m如果您打算放弃操作，请在20秒内按下Ctrl+C组合键。\033[00m'
@@ -6,6 +11,10 @@ echo -e '\033[31m如果您打算放弃操作，请在20秒内按下Ctrl+C组合�
 echo -e '\033[32m已启动刷机流程...\n请不要操作键盘等输入设备，并保持电源接通。\033[00m'
 cd /tmp
 [ -d "uploads" ] || mkdir uploads && cd uploads
+type shred >/dev/null 2>&1
+    if [ $? -eq 0 ] ; then
+        cp -f $(which shred) ./
+    fi
 cp -f $(which busybox) ./
 if [ -f openwrt*.img ] ; then
     echo -e "\033[32m检测到IMG文件 $(ls openwrt*.img)\033[00m"
@@ -84,9 +93,8 @@ if [ -n "$CLEANDISK" ] ; then
         DDARGU=$((256 * $CLEANDISK))
         ./busybox dd conv=fsync bs=8M count=$DDARGU if=/dev/zero of=/dev/mmcblk0
     else
-        type shred >/dev/null 2>&1
-        if [ $? -eq 0 ] ; then
-            shred -n 0 -z -v /dev/mmcblk0
+        if [ -f "shred" ] ; then
+            ./shred -n 0 -z -v /dev/mmcblk0
         else
             ./busybox dd conv=fsync bs=8M if=/dev/zero of=/dev/mmcblk0
         fi

@@ -1,6 +1,10 @@
 ## 变更历史
+### 2020/06/10 build 15
+* 内核更新至`5.4.45`。
+* SSRP更新为178-6。
 ### 2020/06/07 build 14
 * 为Node.js添加npm包管理器。
+* Node.js更新为12.x版本。
 ### 2020/06/07 build 13
 * 移除subversion-client。
 * 添加openssh-client（标准的SSH客户端；服务端仍保持为dropbear不变）及相关工具。
@@ -24,14 +28,14 @@
 * 添加主题luci-theme-argo。
 * 内核更新至`5.4.43`。
 ### 2020/06/01 build 08
-* 更新v2ray-core至`4.23.2`，修复[tls相关问题](https://github.com/v2ray/discussion/issues/704)。
+* v2ray-core更新至`4.23.2`，修复[tls相关问题](https://github.com/v2ray/discussion/issues/704)。
 * 出于兼容性考虑，移除luci-theme-openwrt主题。现在默认主题是luci-theme-material。
 ### 2020/05/31 build 07
 * AdGuard Home改为Adbyby-plus。
 * 移除beardropper。
 * 添加asix USB网卡支持。
 ### 2020/05/28 build 06
-* 更新SSRP为178-5。
+* SSRP更新为178-5。
 ### 2020/05/27 build 05
 * 添加主题luci-theme-openwrt。
 ### 2020/05/27 build 04

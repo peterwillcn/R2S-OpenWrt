@@ -78,17 +78,22 @@ else
     echo -e '\033[1;31m没有找到受支持的刷机包\033[00m'
     exit 132
 fi
-#echo 1 > /proc/sys/kernel/sysrq
-#echo u > /proc/sysrq-trigger || umount /
+echo 1 > /proc/sys/kernel/sysrq
+umount / || echo u > /proc/sysrq-trigger
 
 if [ -n "$CLEANDISK" ] ; then
-    if [[ $CLEANDISK =~ ^[1-9][0-9]*$ ]] ; then
-        DDARGU="count=$((256 * $CLEANDISK))"
-    else
-        DDARGU=""
-    fi
     echo -e '\033[32m开始擦除MicroSD卡：通常这将消耗很长时间。\033[00m'
-    ./busybox dd conv=fsync bs=8M $DDARGU if=/dev/zero of=/dev/mmcblk0
+    if [[ $CLEANDISK =~ ^[1-9][0-9]*$ ]] ; then
+        DDARGU=$((256 * $CLEANDISK))
+        ./busybox dd conv=fsync bs=8M count=$DDARGU if=/dev/zero of=/dev/mmcblk0
+    else
+        type shred >/dev/null 2>&1
+        if [ $? -eq 0 ] ; then
+            shred -n 0 -z -v /dev/mmcblk0
+        else
+            ./busybox dd conv=fsync bs=8M if=/dev/zero of=/dev/mmcblk0
+        fi
+    fi
     echo -e '\033[32m擦除完成\033[00m'
 fi
 

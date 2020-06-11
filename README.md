@@ -1,4 +1,4 @@
-## R2S 基于原生OpenWRT 的固件
+## R2S 基于原生OpenWRT 的固件(AS IS, NO WARRANTY!!!)
 
 ### 发布地址：
 https://github.com/QiuSimons/R2S-OpenWrt/releases

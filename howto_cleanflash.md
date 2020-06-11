@@ -10,9 +10,13 @@ curl --proto '=https' --tlsv1.2 -sSf -o clean_flash.sh \
 使用sftp工具或scp命令将固件上传到`/tmp/uploads`目录下。  
 支持IMG镜像文件或GZ压缩包格式。  
 文件名以`openwrt`开头，以`.img`或`.img.gz`结尾（注意：大小写敏感）。
+
+如果有MD5或SHA256的校验文件，请也上传到`/tmp/uploads`目录下。  
+MD5校验文件的文件名称格式为`md5_????????.hash`。  
+SHA256校验文件的文件名称格式为`sha256_????????.hash`。
 ### 3. 执行刷机
 #### 3.1 不执行清盘
-若不打算对储存卡进行“写零”处理，请允许下面的命令。
+若不打算对储存卡进行“写零”处理，请执行下面的命令。
 ```bash
 /bin/bash /tmp/uploads/clean_flash.sh
 ```

@@ -68,6 +68,11 @@ jobs:
         mv ../SEED/config.seed .config
         make defconfig
         chmod -R 755 ./
+    - name: Make Download
+      run: |
+        df -h
+        cd openwrt
+        make download -j10
     - name: Make Toolchain
       run: |
         df -h

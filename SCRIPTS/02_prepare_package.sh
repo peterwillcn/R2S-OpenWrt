@@ -132,5 +132,5 @@ rm -rf .config
 sed -i "s,boardinfo.system,'ARMv8',g" feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js
 chmod -R 755 ./
 mv ../PATCH/irq_optimize.sh package/base-files/files/usr/bin
-mv ../PATCH/irq package/base-files/files/etc/init.d
+mv ../PATCH/irq_optimize package/base-files/files/etc/init.d
 exit 0

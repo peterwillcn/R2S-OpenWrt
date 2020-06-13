@@ -1,10 +1,12 @@
 ## 变更历史
+### 2020/06/13 build 16
+* SSRP更新为`178-7`，trojan更新至`1.16.0`,v2ray-core更新至`4.24.2`。
 ### 2020/06/10 build 15
 * 内核更新至`5.4.45`。
-* SSRP更新为178-6。
+* SSRP更新为`178-6`。
 ### 2020/06/07 build 14
 * 为Node.js添加npm包管理器。
-* Node.js更新为12.x版本。
+* Node.js更新为`v12.16.1`版本。
 ### 2020/06/07 build 13
 * 移除subversion-client。
 * 添加openssh-client（标准的SSH客户端；服务端仍保持为dropbear不变）及相关工具。
@@ -35,7 +37,7 @@
 * 移除beardropper。
 * 添加asix USB网卡支持。
 ### 2020/05/28 build 06
-* SSRP更新为178-5。
+* SSRP更新为`178-5`。
 ### 2020/05/27 build 05
 * 添加主题luci-theme-openwrt。
 ### 2020/05/27 build 04

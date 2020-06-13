@@ -25,6 +25,9 @@ jobs:
 
     - name: Show system and free disk space
       run: |
+        echo -e "Total CPU cores\t: $(nproc)"
+        cat /proc/cpuinfo | grep 'model name'
+        free -h
         uname -a
         [ -f /proc/version ] && cat /proc/version
         [ -f /etc/issue.net ] && cat /etc/issue.net
@@ -86,21 +89,22 @@ jobs:
       run: |
         df -h
         cd openwrt
-        make download -j10
+        let Make_Process=$(nproc)*2
+        make download -j${Make_Process}
 
     - name: Make Toolchain
       run: |
         df -h
         cd openwrt
-        let make_process=$(nproc)+1
-        make toolchain/install -j${make_process} V=s
+        let Make_Process=$(nproc)+1
+        make toolchain/install -j${Make_Process} V=s
 
     - name: Compile Openwrt
       run: |
         df -h
         cd openwrt
-        let make_process=$(nproc)+1
-        make -j${make_process} V=s || make -j${make_process} V=s || make -j1 V=s
+        let Make_Process=$(nproc)+1
+        make -j${Make_Process} V=s
 
     - name: Cleaning and hashing
       run: |
@@ -114,7 +118,6 @@ jobs:
         cd bin/targets/rockchip/armv8
         /bin/bash ../../../../../SCRIPTS/05_cleaning.sh
         mv -f ./* ../../../../../artifact/
-        df -h
         echo "::set-output name=status::success"
 
     - name: Upload Firmwares

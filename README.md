@@ -10,6 +10,8 @@ https://github.com/QiuSimons/R2S-OpenWrt/actions
 git clone https://github.com/QiuSimons/R2S-OpenWrt.git&&cd R2S-OpenWrt&&bash onekeyr2s.sh
 
 ### 注意事项：
+0.IRQ脚本依赖nohup组件，fork后自行魔改的用户请补全依赖（默认状态下nohup是openclash的依赖，所以我这边没加，如果你去掉了openclash，请自行补齐依赖）
+
 1.登陆IP：192.168.1.1 密码：无
 
 2.LAN 和 WAN的灯可能不亮

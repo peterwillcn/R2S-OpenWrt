@@ -4,7 +4,7 @@
 ### 2020/06/14 build 17
 * 移除未生效的OPENSSL_ENGINE_BUILTIN。
 ### 2020/06/13 build 16
-* SSRP更新为`178-7`，trojan更新至`1.16.0`,v2ray-core更新至`4.24.2`。
+* SSRP更新为`178-7`，trojan更新至`1.16.0`，v2ray-core更新至`4.24.2`。
 ### 2020/06/10 build 15
 * 内核更新至`5.4.45`。
 * SSRP更新为`178-6`。

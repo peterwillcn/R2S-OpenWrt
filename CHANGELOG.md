@@ -1,4 +1,6 @@
 ## 变更历史
+### 2020/06/14 build 18
+* 来自[上游](https://github.com/QiuSimons/R2S-OpenWrt/tree/3954f46c35331b0b6837c073961281a728187ed8)的重要变更：取消irqbalance，改为手动绑定软中断的CPU亲和力，以提升高负载情况下的性能表现。
 ### 2020/06/14 build 17
 * 移除未生效的OPENSSL_ENGINE_BUILTIN。
 ### 2020/06/13 build 16

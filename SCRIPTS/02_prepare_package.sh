@@ -108,6 +108,11 @@ svn co https://github.com/pymumu/smartdns/trunk/package/openwrt package/new/smar
 svn co https://github.com/project-openwrt/openwrt/branches/openwrt-19.07/package/ntlf9t/luci-app-smartdns package/new/smartdns/luci-app-smartdns
 #上网APP过滤
 git clone -b master --single-branch https://github.com/destan19/OpenAppFilter package/new/OpenAppFilter
+#Docker
+mkdir -p package/luci-lib-docker && \
+wget https://raw.githubusercontent.com/lisaac/luci-lib-docker/master/Makefile -O package/luci-lib-docker/Makefile
+mkdir -p package/luci-app-dockerman && \
+wget https://raw.githubusercontent.com/lisaac/luci-app-dockerman/master/Makefile -O package/luci-app-dockerman/Makefile
 #FullCone补丁
 # FullCone 
 git clone -b master --single-branch https://github.com/QiuSimons/openwrt-fullconenat package/fullconenat

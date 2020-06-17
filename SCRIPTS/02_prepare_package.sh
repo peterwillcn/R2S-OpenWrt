@@ -113,6 +113,7 @@ mkdir -p package/luci-lib-docker && \
 wget https://raw.githubusercontent.com/lisaac/luci-lib-docker/master/Makefile -O package/luci-lib-docker/Makefile
 mkdir -p package/luci-app-dockerman && \
 wget https://raw.githubusercontent.com/lisaac/luci-app-dockerman/master/Makefile -O package/luci-app-dockerman/Makefile
+svn co https://github.com/openwrt/packages/trunk/utils/docker-ce package/utils/docker-ce
 #FullCone补丁
 # FullCone 
 git clone -b master --single-branch https://github.com/QiuSimons/openwrt-fullconenat package/fullconenat

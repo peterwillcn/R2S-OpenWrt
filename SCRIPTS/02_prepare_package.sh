@@ -124,6 +124,8 @@ svn co https://github.com/openwrt/packages/trunk/utils/tini package/utils/tini
 svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/utils/fuse package/utils/fuse
 svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/network/services/samba36 package/network/services/samba36
 svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/libs/libconfig package/libs/libconfig
+rm -rf ./feeds/packages/utils/collectd
+svn co https://github.com/openwrt/packages/trunk/utils/collectd feeds/packages/utils/collectd
 #FullCone补丁
 # FullCone 
 git clone -b master --single-branch https://github.com/QiuSimons/openwrt-fullconenat package/fullconenat

@@ -120,6 +120,7 @@ svn co https://github.com/openwrt/packages/trunk/utils/cgroupfs-mount package/ut
 svn co https://github.com/openwrt/packages/trunk/utils/containerd package/utils/containerd
 svn co https://github.com/openwrt/packages/trunk/utils/libnetwork package/utils/libnetwork
 svn co https://github.com/openwrt/packages/trunk/utils/tini package/utils/tini
+svn co https://github.com/openwrt/packages/trunk/utils/runc package/utils/runc
 #补全部分依赖（实际上并不会用到
 svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/utils/fuse package/utils/fuse
 svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/network/services/samba36 package/network/services/samba36

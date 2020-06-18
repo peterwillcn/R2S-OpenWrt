@@ -1,4 +1,6 @@
 ## 变更历史
+### 2020/06/18 build 19
+* 更新[上游](https://github.com/QiuSimons/R2S-OpenWrt/tree/4dc98c9b7a745cb25f56f679ceae8af23d164f73)。
 ### 2020/06/14 build 18
 * 来自[上游](https://github.com/QiuSimons/R2S-OpenWrt/tree/3954f46c35331b0b6837c073961281a728187ed8)的重要变更：取消irqbalance，改为手动绑定软中断的CPU亲和力，以提升高负载情况下的性能表现。
 * SSRP更新为`179-1`。

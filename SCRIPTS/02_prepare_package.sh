@@ -7,6 +7,8 @@ sed -i 's,SNAPSHOT,,g' include/version.mk
 sed -i 's,snapshots,,g' package/base-files/image-config.in
 # 更新feed
 ./scripts/feeds update -a && ./scripts/feeds install -a
+# patch jsonc
+patch -p1 < ../PATCH/use_json_object_new_int64.patch
 # dnsmasq filter AAAA
 patch -p1 < ../PATCH/dnsmasq-add-filter-aaaa-option.patch
 patch -p1 < ../PATCH/luci-add-filter-aaaa-option.patch
@@ -61,7 +63,7 @@ svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/microsocks packag
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/dns2socks package/lean/dns2socks
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/redsocks2 package/lean/redsocks2
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/proxychains-ng package/lean/proxychains-ng
-git clone -b master --single-branch https://github.com/pexcn/openwrt-ipt2socks package/lean/ipt2socks
+svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/ipt2socks package/lean/ipt2socks
 git clone -b master --single-branch https://github.com/aa65535/openwrt-simple-obfs package/lean/simple-obfs
 svn co https://github.com/coolsnowwolf/packages/trunk/net/shadowsocks-libev package/lean/shadowsocks-libev
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/trojan package/lean/trojan
@@ -84,15 +86,23 @@ svn co https://github.com/vernesong/OpenClash/branches/master/luci-app-openclash
 svn co https://github.com/pymumu/smartdns/trunk/package/openwrt package/new/smartdns/smartdns
 svn co https://github.com/project-openwrt/openwrt/branches/openwrt-19.07/package/ntlf9t/luci-app-smartdns package/new/smartdns/luci-app-smartdns
 # Dockerman
-git clone https://github.com/lisaac/luci-app-dockerman.git package/lean/luci-app-dockerman
-git clone https://github.com/lisaac/luci-lib-docker package/lean/luci-lib-docker
+mkdir -p package/luci-lib-docker && \
+wget https://raw.githubusercontent.com/lisaac/luci-lib-docker/master/Makefile -O package/luci-lib-docker/Makefile
+mkdir -p package/luci-app-dockerman && \
+wget https://raw.githubusercontent.com/lisaac/luci-app-dockerman/master/Makefile -O package/luci-app-dockerman/Makefile
 svn co https://github.com/openwrt/packages/trunk/utils/docker-ce package/lean/docker-ce
 svn co https://github.com/openwrt/packages/trunk/utils/cgroupfs-mount package/lean/cgroupfs-mount
+svn co https://github.com/openwrt/packages/trunk/utils/containerd package/lean/containerd
 svn co https://github.com/openwrt/packages/trunk/utils/libnetwork package/lean/libnetwork
 svn co https://github.com/openwrt/packages/trunk/utils/tini package/lean/tini
-svn co https://github.com/openwrt/packages/trunk/utils/containerd package/lean/containerd
 svn co https://github.com/openwrt/packages/trunk/utils/runc package/lean/runc
+rm -rf ./package/lang/golang
 svn co https://github.com/openwrt/packages/trunk/lang/golang package/lang/golang
+# 补全部分依赖（实际上并不会用到）
+svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/utils/fuse package/utils/fuse
+svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/libs/libconfig package/libs/libconfig
+rm -rf ./feeds/packages/utils/collectd
+svn co https://github.com/openwrt/packages/trunk/utils/collectd feeds/packages/utils/collectd
 # Zerotier
 git clone https://github.com/rufengsuixing/luci-app-zerotier package/lean/luci-app-zerotier
 svn co https://github.com/coolsnowwolf/packages/trunk/net/zerotier package/lean/zerotier

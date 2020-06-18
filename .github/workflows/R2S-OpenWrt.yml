@@ -89,7 +89,7 @@ jobs:
       run: |
         df -h
         cd openwrt
-        let Make_Process=$(nproc)*2
+        let Make_Process=$(nproc)*4
         make download -j${Make_Process}
 
     - name: Make Toolchain

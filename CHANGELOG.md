@@ -1,4 +1,6 @@
 ## 变更历史
+### 2020/06/18 build 20
+* 实验性构建：尝试启用所有Generally Necessary和常用见的Optional Features。
 ### 2020/06/18 build 19
 * 更新[上游](https://github.com/QiuSimons/R2S-OpenWrt/tree/4dc98c9b7a745cb25f56f679ceae8af23d164f73)。
 ### 2020/06/14 build 18

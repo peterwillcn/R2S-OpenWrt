@@ -1,4 +1,8 @@
 ## 变更历史
+### 2020/06/19 build 22
+* 移除构建过程中download的步骤。
+### 2020/06/18 build 21
+* 由于build 20实验性构建实际无效，已撤销更改。
 ### 2020/06/18 build 20
 * 实验性构建：尝试启用所有Generally Necessary和常用见的Optional Features。
 ### 2020/06/18 build 19

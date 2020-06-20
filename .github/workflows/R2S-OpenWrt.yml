@@ -85,6 +85,13 @@ jobs:
         make defconfig
         chmod -R 755 ./
 
+    - name: Make Download
+      run: |
+        df -h
+        cd openwrt
+        let Make_Process=$(nproc)*4
+        make download -j${Make_Process}
+
     - name: Make Toolchain
       run: |
         df -h

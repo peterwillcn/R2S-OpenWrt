@@ -6,7 +6,7 @@ wget https://raw.githubusercontent.com/openwrt/openwrt/openwrt-19.07/feeds.conf.
 sed -i 's,SNAPSHOT,,g' include/version.mk
 sed -i 's,snapshots,,g' package/base-files/image-config.in
 #测试替换kernel_config
-cat ../SEED/config-5.4.test > target/linux/rockchip/armv8/config-5.4
+#cat ../SEED/config-5.4.test > target/linux/rockchip/armv8/config-5.4
 #更新feed
 ./scripts/feeds update -a && ./scripts/feeds install -a
 #GCC

@@ -7,6 +7,9 @@ sed -i 's,SNAPSHOT,,g' include/version.mk
 sed -i 's,snapshots,,g' package/base-files/image-config.in
 #更新feed
 ./scripts/feeds update -a && ./scripts/feeds install -a
+#GCC
+rm -rf ./feeds/packages/devel/gcc
+svn co https://github.com/openwrt/packages/trunk/devel/gcc feeds/packages/devel/gcc
 #fix bd issue
 #beardropper
 git clone https://github.com/NateLol/luci-app-beardropper package/luci-app-beardropper

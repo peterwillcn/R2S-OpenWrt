@@ -1,4 +1,8 @@
 ## 变更历史
+### 2020/06/20 build 23
+* 移除XFS文件系统相关支持。
+* 更新[上游](https://github.com/QiuSimons/R2S-OpenWrt/tree/4c63f15bdf78780feb3bc5ae11cde1b6d0cf1031)。
+* 改进对Docker的支持。
 ### 2020/06/19 build 22
 * 移除构建过程中download的步骤。
 ### 2020/06/18 build 21
@@ -7,6 +11,7 @@
 * 实验性构建：尝试启用所有Generally Necessary和常用见的Optional Features。
 ### 2020/06/18 build 19
 * 更新[上游](https://github.com/QiuSimons/R2S-OpenWrt/tree/4dc98c9b7a745cb25f56f679ceae8af23d164f73)。
+* 内核更新至`5.4.46`。
 ### 2020/06/14 build 18
 * 来自[上游](https://github.com/QiuSimons/R2S-OpenWrt/tree/3954f46c35331b0b6837c073961281a728187ed8)的重要变更：取消irqbalance，改为手动绑定软中断的CPU亲和力，以提升高负载情况下的性能表现。
 * SSRP更新为`179-1`。

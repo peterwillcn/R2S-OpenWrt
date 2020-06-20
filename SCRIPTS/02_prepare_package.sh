@@ -101,16 +101,12 @@ svn co https://github.com/openwrt/packages/trunk/lang/golang package/lang/golang
 # Patch config-5.4 to support docker: (and more)
 echo '
 CONFIG_CGROUP_HUGETLB=y
-CONFIG_CGROUP_NET_PRIO=m
+CONFIG_CGROUP_NET_PRIO=y
+CONFIG_DM_THIN_PROVISIONING=y
 CONFIG_EXT4_FS_SECURITY=y
 CONFIG_IPVLAN=m
-CONFIG_DM_THIN_PROVISIONING=y
-CONFIG_CFQ_GROUP_IOSCHED=y
-CONFIG_DUMMY=m
-CONFIG_IOSCHED_CFQ=y
 CONFIG_MACVLAN=m
-CONFIG_NF_NAT_IPV4=m
-CONFIG_NF_NAT_NEEDED=y
+CONFIG_DUMMY=m
 ' >> ./target/linux/rockchip/armv8/config-5.4
 # 补全部分依赖（实际上并不会用到）
 svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/utils/fuse package/utils/fuse

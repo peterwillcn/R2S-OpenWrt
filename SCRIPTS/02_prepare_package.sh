@@ -7,6 +7,9 @@ sed -i 's,SNAPSHOT,,g' include/version.mk
 sed -i 's,snapshots,,g' package/base-files/image-config.in
 # 更新feed
 ./scripts/feeds update -a && ./scripts/feeds install -a
+# GCC
+rm -rf ./feeds/packages/devel/gcc
+svn co https://github.com/openwrt/packages/trunk/devel/gcc feeds/packages/devel/gcc
 # patch jsonc
 patch -p1 < ../PATCH/use_json_object_new_int64.patch
 # dnsmasq filter AAAA
@@ -107,6 +110,13 @@ CONFIG_EXT4_FS_SECURITY=y
 CONFIG_IPVLAN=m
 CONFIG_MACVLAN=m
 CONFIG_DUMMY=m
+CONFIG_NF_NAT_IPV4=y
+CONFIG_NF_NAT_IPV6=y
+CONFIG_NETFILTER_XT_TARGET_CHECKSUM=y
+CONFIG_UNIX_DIAG=y
+CONFIG_INET_DIAG=y
+CONFIG_PACKET_DIAG=y
+CONFIG_NETLINK_DIAG=y
 ' >> ./target/linux/rockchip/armv8/config-5.4
 # 补全部分依赖（实际上并不会用到）
 svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/utils/fuse package/utils/fuse

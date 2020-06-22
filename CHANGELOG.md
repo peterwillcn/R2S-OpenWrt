@@ -2,6 +2,7 @@
 ### 2020/06/22 build 24
 * 更新[上游](https://github.com/QiuSimons/R2S-OpenWrt/tree/b887731d111135ab36e9c40a2363274e1f3f3069)。
 * v2ray-core更新至`4.25.0`。
+* 加入了GCC编译器。
 ### 2020/06/20 build 23
 * 移除XFS文件系统相关支持。
 * 更新[上游](https://github.com/QiuSimons/R2S-OpenWrt/tree/4c63f15bdf78780feb3bc5ae11cde1b6d0cf1031)。

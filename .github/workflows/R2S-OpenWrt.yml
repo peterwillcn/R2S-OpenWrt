@@ -10,6 +10,7 @@ on:
 
 env:
   UPLOAD_FIRMWARE: true
+  WITH_GCC: true
   TZ: Asia/Hong_Kong
 
 jobs:
@@ -67,6 +68,14 @@ jobs:
         cp -r ../SCRIPTS/. ./
         /bin/bash 02_prepare_package.sh
 
+    - name: Add GCC
+      if: env.WITH_GCC == 'true'
+      run: |
+        rm -rf ./openwrt/feeds/packages/devel/gcc
+        svn co https://github.com/openwrt/packages/trunk/devel/gcc openwrt/feeds/packages/devel/gcc
+        chmod -R 755 openwrt/feeds/packages/devel/gcc
+        cat SEED/gcc.seed >> SEED/config.seed
+
     - name: Convert Translation
       run: |
         cd openwrt
@@ -80,7 +89,7 @@ jobs:
     - name: Make Config
       run: |
         cd openwrt
-        mv  ../SEED/config.seed  .config
+        cp  ../SEED/config.seed  .config
         cat ../SEED/more.seed >> .config
         make defconfig
         chmod -R 755 ./

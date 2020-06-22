@@ -1,35 +1,57 @@
 #!/bin/bash
 clear
+##准备工作
+#使用19.07的feed源
 rm -f ./feeds.conf.default
 wget https://raw.githubusercontent.com/openwrt/openwrt/openwrt-19.07/feeds.conf.default
 #remove annoying snapshot tag
 sed -i 's,SNAPSHOT,,g' include/version.mk
 sed -i 's,snapshots,,g' package/base-files/image-config.in
-#测试替换kernel_config
-#cat ../SEED/config-5.4.test > target/linux/rockchip/armv8/config-5.4
+#使用O3级别的优化
+sed -i 's/Os/O3/g' include/target.mk
+sed -i 's/O2/O3/g' ./rules.mk
 #更新feed
 ./scripts/feeds update -a && ./scripts/feeds install -a
-#GCC
+#irqbalance
+sed -i 's/0/1/g' feeds/packages/utils/irqbalance/files/irqbalance.config
+
+##必要的patch
+#patch jsonc
+patch -p1 < ../PATCH/use_json_object_new_int64.patch
+#patch dnsmasq
+patch -p1 < ../PATCH/dnsmasq-add-filter-aaaa-option.patch
+patch -p1 < ../PATCH/luci-add-filter-aaaa-option.patch
+cp -f ../PATCH/900-add-filter-aaaa-option.patch ./package/network/services/dnsmasq/patches/900-add-filter-aaaa-option.patch
+#patch config-5.4 to support docker:
+echo '
+CONFIG_CGROUP_HUGETLB=y
+CONFIG_CGROUP_NET_PRIO=y
+CONFIG_EXT4_FS_SECURITY=y
+CONFIG_IPVLAN=y
+CONFIG_DM_THIN_PROVISIONING=y
+' >> ./target/linux/rockchip/armv8/config-5.4
+#Patch FireWall 以增添fullcone功能 
+mkdir package/network/config/firewall/patches
+wget -P package/network/config/firewall/patches/ https://github.com/LGA1150/fullconenat-fw3-patch/raw/master/fullconenat.patch
+# Patch LuCI 以增添fullcone开关
+pushd feeds/luci
+wget -O- https://github.com/LGA1150/fullconenat-fw3-patch/raw/master/luci.patch | git apply
+popd
+# Patch Kernel 以解决fullcone冲突
+pushd target/linux/generic/hack-5.4
+wget https://raw.githubusercontent.com/project-openwrt/openwrt/18.06-kernel5.4/target/linux/generic/hack-5.4/952-net-conntrack-events-support-multiple-registrant.patch
+popd
+
+##获取额外package
+#更换GCC版本
 rm -rf ./feeds/packages/devel/gcc
 svn co https://github.com/openwrt/packages/trunk/devel/gcc feeds/packages/devel/gcc
-#fix bd issue
 #beardropper
 git clone https://github.com/NateLol/luci-app-beardropper package/luci-app-beardropper
 sed -i 's/"luci.fs"/"luci.sys".net/g' package/luci-app-beardropper/luasrc/model/cbi/beardropper/setting.lua
 sed -i '/firewall/d' package/luci-app-beardropper/root/etc/uci-defaults/luci-beardropper
-#patch jsonc
-patch -p1 < ../PATCH/use_json_object_new_int64.patch
-#dnsmasq
-#rm -rf ./package/network/services/dnsmasq
-#svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/network/services/dnsmasq package/network/services/dnsmasq
-patch -p1 < ../PATCH/dnsmasq-add-filter-aaaa-option.patch
-patch -p1 < ../PATCH/luci-add-filter-aaaa-option.patch
-cp -f ../PATCH/900-add-filter-aaaa-option.patch ./package/network/services/dnsmasq/patches/900-add-filter-aaaa-option.patch
 #arpbind
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-arpbind package/lean/luci-app-arpbind
-#O3
-sed -i 's/Os/O3/g' include/target.mk
-sed -i 's/O2/O3/g' ./rules.mk
 #Adbyby
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-adbyby-plus package/lean/luci-app-adbyby-plus
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/adbyby package/lean/coremark/adbyby
@@ -44,9 +66,6 @@ rm -rf ./package/lean/autocore/files/rpcd_10_system.js
 wget -P package/lean/autocore/files https://raw.githubusercontent.com/QiuSimons/Others/master/rpcd_10_system.js
 svn co https://github.com/project-openwrt/openwrt/branches/openwrt-19.07/package/lean/coremark package/lean/coremark
 sed -i 's,-DMULTIT,-Ofast -DMULTIT,g' package/lean/coremark/Makefile
-#R2S刷机
-svn co https://github.com/songchenwen/nanopi-r2s/trunk/luci-app-r2sflasher package/new/luci-app-r2sflasher
-sed -i 's/"luci.fs"/"luci.sys".net/g' package/new/luci-app-r2sflasher/luasrc/model/cbi/r2sflasher/flash.lua
 #迅雷快鸟
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-xlnetacc package/lean/luci-app-xlnetacc
 #DDNS
@@ -60,11 +79,9 @@ svn co https://github.com/openwrt/luci/branches/openwrt-18.06/applications/luci-
 svn co https://github.com/project-openwrt/openwrt/branches/openwrt-19.07/package/lean/pandownload-fake-server package/lean/pandownload-fake-server
 #网易云解锁
 git clone -b master --single-branch https://github.com/project-openwrt/luci-app-unblockneteasemusic package/new/UnblockNeteaseMusic
-#irqbalance
-sed -i 's/0/1/g' feeds/packages/utils/irqbalance/files/irqbalance.config
 #定时重启
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-autoreboot package/lean/luci-app-autoreboot
-#主题
+#argon主题
 git clone -b master --single-branch https://github.com/jerrykuku/luci-theme-argon package/new/luci-theme-argon
 #AdGuard
 git clone -b master --single-branch https://github.com/rufengsuixing/luci-app-adguardhome package/new/luci-app-adguardhome
@@ -128,44 +145,29 @@ svn co https://github.com/openwrt/packages/trunk/utils/tini package/utils/tini
 svn co https://github.com/openwrt/packages/trunk/utils/runc package/utils/runc
 rm -rf ./package/lang/golang
 svn co https://github.com/openwrt/packages/trunk/lang/golang package/lang/golang
-#patch config-5.4 to support docker:
-echo '
-CONFIG_CGROUP_HUGETLB=y
-CONFIG_CGROUP_NET_PRIO=y
-CONFIG_EXT4_FS_SECURITY=y
-CONFIG_IPVLAN=y
-CONFIG_DM_THIN_PROVISIONING=y
-' >> ./target/linux/rockchip/armv8/config-5.4
 #补全部分依赖（实际上并不会用到
 svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/utils/fuse package/utils/fuse
 svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/network/services/samba36 package/network/services/samba36
 svn co https://github.com/openwrt/openwrt/branches/openwrt-19.07/package/libs/libconfig package/libs/libconfig
 rm -rf ./feeds/packages/utils/collectd
 svn co https://github.com/openwrt/packages/trunk/utils/collectd feeds/packages/utils/collectd
-#FullCone补丁
-# FullCone 
+#FullCone模块
 git clone -b master --single-branch https://github.com/QiuSimons/openwrt-fullconenat package/fullconenat
-# FireWall Patch
-mkdir package/network/config/firewall/patches
-wget -P package/network/config/firewall/patches/ https://github.com/LGA1150/fullconenat-fw3-patch/raw/master/fullconenat.patch
-# Patch LuCI
-pushd feeds/luci
-wget -O- https://github.com/LGA1150/fullconenat-fw3-patch/raw/master/luci.patch | git apply
-popd
-# Patch Kernel
-pushd target/linux/generic/hack-5.4
-wget https://raw.githubusercontent.com/project-openwrt/openwrt/18.06-kernel5.4/target/linux/generic/hack-5.4/952-net-conntrack-events-support-multiple-registrant.patch
-popd
+#翻译及部分功能优化
+git clone -b master --single-branch https://github.com/QiuSimons/addition-trans-zh package/lean/lean-translate
+
+##最后的收尾工作
 #最大连接
 sed -i 's/16384/65536/g' package/kernel/linux/files/sysctl-nf-conntrack.conf
-#翻译
-git clone -b master --single-branch https://github.com/QiuSimons/addition-trans-zh package/lean/lean-translate
-#生成默认配置及缓存
-rm -rf .config
 #修正架构
 sed -i "s,boardinfo.system,'ARMv8',g" feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js
+#irq_optimize
 mkdir package/base-files/files/usr/bin
 cp -f ../PATCH/irq_optimize.sh package/base-files/files/usr/bin/irq_optimize.sh
 cp -f ../PATCH/irq_optimize package/base-files/files/etc/init.d/irq_optimize
+#删除已有配置
+rm -rf .config
+#授予权限
 chmod -R 755 ./
+
 exit 0

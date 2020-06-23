@@ -1,4 +1,4 @@
-name: R2S-OpenWrt-without-docker
+name: R2S-OpenWrt-Without-Docker
 
 on:
 #  push:

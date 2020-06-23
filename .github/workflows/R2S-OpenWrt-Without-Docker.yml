@@ -65,7 +65,7 @@ jobs:
     - name: Make Config
       run: |
         cd openwrt
-        mv ../SEED/config.seed .config
+        mv ../SEED/config_2.seed .config
         make defconfig
         chmod -R 755 ./
     - name: Make Download

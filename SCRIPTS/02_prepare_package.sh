@@ -30,7 +30,7 @@ CONFIG_MACVLAN=m
 CONFIG_DUMMY=m
 CONFIG_DM_THIN_PROVISIONING=y
 ' >> ./target/linux/rockchip/armv8/config-5.4
-# Patch FireWall 以增添fullcone功能 
+# Patch FireWall 以增添fullcone功能
 mkdir package/network/config/firewall/patches
 wget -P package/network/config/firewall/patches/ https://github.com/LGA1150/fullconenat-fw3-patch/raw/master/fullconenat.patch
 # Patch LuCI 以增添fullcone开关
@@ -113,12 +113,12 @@ mkdir -p package/luci-lib-docker && \
 wget https://raw.githubusercontent.com/lisaac/luci-lib-docker/master/Makefile -O package/luci-lib-docker/Makefile
 mkdir -p package/luci-app-dockerman && \
 wget https://raw.githubusercontent.com/lisaac/luci-app-dockerman/master/Makefile -O package/luci-app-dockerman/Makefile
-svn co https://github.com/openwrt/packages/trunk/utils/docker-ce package/lean/docker-ce
-svn co https://github.com/openwrt/packages/trunk/utils/cgroupfs-mount package/lean/cgroupfs-mount
-svn co https://github.com/openwrt/packages/trunk/utils/containerd package/lean/containerd
-svn co https://github.com/openwrt/packages/trunk/utils/libnetwork package/lean/libnetwork
-svn co https://github.com/openwrt/packages/trunk/utils/tini package/lean/tini
-svn co https://github.com/openwrt/packages/trunk/utils/runc package/lean/runc
+svn co https://github.com/openwrt/packages/trunk/utils/docker-ce package/utils/docker-ce
+svn co https://github.com/openwrt/packages/trunk/utils/cgroupfs-mount package/utils/cgroupfs-mount
+svn co https://github.com/openwrt/packages/trunk/utils/containerd package/utils/containerd
+svn co https://github.com/openwrt/packages/trunk/utils/libnetwork package/utils/libnetwork
+svn co https://github.com/openwrt/packages/trunk/utils/tini package/utils/tini
+svn co https://github.com/openwrt/packages/trunk/utils/runc package/utils/runc
 rm -rf ./package/lang/golang
 svn co https://github.com/openwrt/packages/trunk/lang/golang package/lang/golang
 # 补全部分依赖（实际上并不会用到）
